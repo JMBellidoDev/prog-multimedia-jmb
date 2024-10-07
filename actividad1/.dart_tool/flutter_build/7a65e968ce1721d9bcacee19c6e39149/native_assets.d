@@ -1,0 +1,1 @@
+ /home/jmbellido/Escritorio/dev/scv/insti/PMDM/actividad1/.dart_tool/flutter_build/7a65e968ce1721d9bcacee19c6e39149/native_assets.yaml: 

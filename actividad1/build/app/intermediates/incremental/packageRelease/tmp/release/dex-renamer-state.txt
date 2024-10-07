@@ -1,0 +1,4 @@
+#Thu Oct 03 17:59:40 CEST 2024
+base.0=/home/jmbellido/Escritorio/dev/scv/insti/PMDM/actividad1/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
