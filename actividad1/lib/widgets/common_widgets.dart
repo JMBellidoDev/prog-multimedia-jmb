@@ -6,6 +6,7 @@ import '../pages/row.dart';
 import '../pages/column.dart';
 import '../pages/icons.dart';
 import '../pages/rows_and_columns.dart';
+import '../pages/counter.dart';
 import '../utils/constants.dart';
 
 class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
@@ -61,6 +62,9 @@ class InkedDrawerText extends StatelessWidget {
       case ROWS_AND_COLUMNS:
         return const RowsAndColumnsApp();
       
+      case COUNTER: 
+        return const CounterApp();
+
       default:
         return const MainApp();
     }
@@ -146,7 +150,8 @@ class MenuDrawer extends StatelessWidget {
                 InkedDrawerText(text: 'Column', marked: markedLink == COLUMN),
                 InkedDrawerText(text: 'Icons', marked: markedLink == ICONS),
                 InkedDrawerText(text: 'Page', marked: markedLink == PAGE_IMPLEMENTATION),
-                InkedDrawerText(text: 'Rows and Columns', marked: markedLink == ROWS_AND_COLUMNS)
+                InkedDrawerText(text: 'Rows and Columns', marked: markedLink == ROWS_AND_COLUMNS),
+                InkedDrawerText(text: 'Counter', marked: markedLink == COUNTER)
               ],
             ),
           )

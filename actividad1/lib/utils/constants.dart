@@ -6,3 +6,4 @@ const String COLUMN = "Column";
 const String ICONS = "Icons";
 const String PAGE_IMPLEMENTATION = "Page";
 const String ROWS_AND_COLUMNS = "Rows and Columns";
+const String COUNTER = "Counter";
