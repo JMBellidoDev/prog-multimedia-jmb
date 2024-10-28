@@ -1,4 +1,4 @@
-#Mon Oct 21 13:00:21 CEST 2024
+#Mon Oct 28 17:47:48 CET 2024
 base.0=/home/jmbellido/Escritorio/dev/scv/insti/PMDM/actividad1/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/home/jmbellido/Escritorio/dev/scv/insti/PMDM/actividad1/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
 base.2=/home/jmbellido/Escritorio/dev/scv/insti/PMDM/actividad1/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex

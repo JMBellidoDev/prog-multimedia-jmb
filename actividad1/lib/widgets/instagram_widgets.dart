@@ -118,7 +118,6 @@ class EditProfile extends StatelessWidget {
 }
 
 class Contact extends StatelessWidget {
-
   final String imageUrl;
   final String nombreContacto;
 
@@ -126,27 +125,37 @@ class Contact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 16, bottom: 4),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1, 
-              color: Colors.black54
+    return Container(
+      width: 80, // Especifica un ancho fijo
+      margin: const EdgeInsets.symmetric(horizontal: 4), // Espacio entre los contactos
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 16, bottom: 4),
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1, 
+                color: Colors.black54,
+              ),
+              borderRadius: BorderRadius.circular(48),
             ),
-            borderRadius: BorderRadius.circular(48)  
+            child: ClipOval(
+              child: Image.asset(
+                imageUrl,
+                width: 48,
+                height: 48,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-          child: ClipOval(
-            child: Image.asset(imageUrl, width: 48),
+          Text(
+            nombreContacto,
+            style: GoogleFonts.rubik(fontWeight: FontWeight.w500, fontSize: 13),
           ),
-          
-        ),
-        Text(
-          nombreContacto,
-          style: GoogleFonts.rubik(fontWeight: FontWeight.w500, fontSize: 13)
-        )
-      ],
+        ],
+      ),
     );
   }
 }
@@ -156,54 +165,56 @@ class Contacts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 16, bottom: 4),
-              padding: const EdgeInsets.all(5.0),
-
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black54, 
-                  width: 1
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 16, bottom: 4, left: 12, right: 8),
+                padding: const EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black54, 
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                borderRadius: BorderRadius.circular(50)
+                child: const Icon(Icons.add, size: 38, color: Colors.black87),
               ),
-
-              child: const Icon(Icons.add, size: 38, color: Colors.black87)
-            ),
-            Text(
-              'Nuevo',
-              style: GoogleFonts.rubik(fontWeight: FontWeight.w500, fontSize: 13)
-            )
-          ]
-        ),
-        const Contact(
-          imageUrl: 'assets/images/instagram/instagram-contacto1.png',
-          nombreContacto: 'Contacto1'
-        ),
-        const Contact(
-          imageUrl: 'assets/images/instagram/instagram-contacto2.png',
-          nombreContacto: 'Contacto2'
-        ),
-        const Contact(
-          imageUrl: 'assets/images/instagram/instagram-contacto3.png',
-          nombreContacto: 'Contacto3'
-        ),
-        const Contact(
-          imageUrl: 'assets/images/instagram/instagram-contacto4.png',
-          nombreContacto: 'Contacto4'
-        ),
-        
-        
-      ],
+              Text(
+                'Nuevo',
+                style: GoogleFonts.rubik(fontWeight: FontWeight.w500, fontSize: 13),
+              ),
+            ],
+          ),
+          const Contact(
+            imageUrl: 'assets/images/instagram/instagram-contacto1.png',
+            nombreContacto: 'Contacto1',
+          ),
+          const Contact(
+            imageUrl: 'assets/images/instagram/instagram-contacto2.png',
+            nombreContacto: 'Contacto2',
+          ),
+          const Contact(
+            imageUrl: 'assets/images/instagram/instagram-contacto3.png',
+            nombreContacto: 'Contacto3',
+          ),
+          const Contact(
+            imageUrl: 'assets/images/instagram/instagram-contacto4.png',
+            nombreContacto: 'Contacto4',
+          ),
+          const Contact(
+            imageUrl: 'assets/images/instagram/instagram-contacto5.png', 
+            nombreContacto: 'Contacto5'
+          )
+        ],
+      ),
     );
   }
 }
-
 class IconsShow extends StatelessWidget {
   const IconsShow({super.key});
 
@@ -259,6 +270,48 @@ class ContactMe extends StatelessWidget {
       child: ClipOval(
         child: Image.asset('assets/images/instagram/perfil-instagram.png', width: 24),
       ),
+    );
+  }
+}
+
+class ImageGrid extends StatelessWidget {
+  const ImageGrid({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GridView.count(
+      mainAxisSpacing: 2,
+      crossAxisSpacing: 2,
+      crossAxisCount: 3,
+      children: List.generate(9, (index) {
+        return SizedBox(
+          child: Image.asset(
+            'assets/images/instagram/grid-${index + 1}.png',
+            fit: BoxFit.cover,
+          ),
+        );
+      }),
+    ));
+  }
+}
+
+class BottomNavigationBarInstagram extends StatelessWidget {
+  const BottomNavigationBarInstagram({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(icon: const Icon(Icons.home_outlined, size: 34), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.search, size: 34), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.add_box_outlined, size: 34), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.favorite_border, size: 34), onPressed: () {}),
+          const ContactMe(),
+        ],
+      )
     );
   }
 }

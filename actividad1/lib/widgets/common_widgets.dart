@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../pages/main_app.dart';
-import '../pages/page.dart';
-import '../pages/row.dart';
-import '../pages/column.dart';
-import '../pages/icons.dart';
-import '../pages/rows_and_columns.dart';
-import '../pages/counter.dart';
-import '../pages/instagram.dart';
-import '../utils/constants.dart';
+import '../screens/screens.dart';
 
 class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
 
@@ -38,13 +30,13 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
 
 class InkedDrawerText extends StatelessWidget {
 
-  final String text;
+  final String url;
   final bool marked;
 
-  const InkedDrawerText({super.key, required this.text, required this.marked});
+  const InkedDrawerText({super.key, required this.url, required this.marked});
 
-  Widget getPageWithText(String text) {
-    switch (text) {
+  Widget getPageWithUrl(String url) {
+    switch (url) {
       case HOME:
         return const MainApp();
       
@@ -74,6 +66,37 @@ class InkedDrawerText extends StatelessWidget {
     }
   }
 
+  String getDrawerText(String url) {
+        switch (url) {
+      case HOME:
+        return 'Home';
+      
+      case ROW:
+        return 'Row';
+
+      case COLUMN:
+        return 'Column';
+
+      case ICONS:
+        return 'Icons';
+
+      case PAGE_IMPLEMENTATION:
+        return 'Page Implementation';
+        
+      case ROWS_AND_COLUMNS:
+        return 'Rows and Columns';
+      
+      case COUNTER: 
+        return 'Counter';
+
+      case INSTAGRAM:
+        return 'Instagram';
+
+      default:
+        return 'Home';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,7 +110,7 @@ class InkedDrawerText extends StatelessWidget {
         color: marked ? Colors.blue : const Color.fromRGBO(247, 242, 250, 1),
         child: ListTile(
           title: Text(
-            text,
+            getDrawerText(url),
             style: GoogleFonts.rubik(
               color: marked ?Colors.white : Colors.black,
               fontWeight: FontWeight.w600,
@@ -96,9 +119,7 @@ class InkedDrawerText extends StatelessWidget {
             onTap: 
             !marked ? () {
               Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => getPageWithText(text)
-              ));
+              Navigator.pushNamed(context, url);
             } : () {},
         )
       )
@@ -149,14 +170,14 @@ class MenuDrawer extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                InkedDrawerText(text: 'Home', marked: markedLink == HOME),
-                InkedDrawerText(text: 'Row', marked: markedLink == ROW),
-                InkedDrawerText(text: 'Column', marked: markedLink == COLUMN),
-                InkedDrawerText(text: 'Icons', marked: markedLink == ICONS),
-                InkedDrawerText(text: 'Page', marked: markedLink == PAGE_IMPLEMENTATION),
-                InkedDrawerText(text: 'Rows and Columns', marked: markedLink == ROWS_AND_COLUMNS),
-                InkedDrawerText(text: 'Counter', marked: markedLink == COUNTER),
-                InkedDrawerText(text: 'Instagram', marked: markedLink == INSTAGRAM)
+                InkedDrawerText(url: HOME, marked: markedLink == HOME),
+                InkedDrawerText(url: ROW, marked: markedLink == ROW),
+                InkedDrawerText(url: COLUMN, marked: markedLink == COLUMN),
+                InkedDrawerText(url: ICONS, marked: markedLink == ICONS),
+                InkedDrawerText(url: PAGE_IMPLEMENTATION, marked: markedLink == PAGE_IMPLEMENTATION),
+                InkedDrawerText(url: ROWS_AND_COLUMNS, marked: markedLink == ROWS_AND_COLUMNS),
+                InkedDrawerText(url: COUNTER, marked: markedLink == COUNTER),
+                InkedDrawerText(url: INSTAGRAM, marked: markedLink == INSTAGRAM)
               ],
             ),
           )
