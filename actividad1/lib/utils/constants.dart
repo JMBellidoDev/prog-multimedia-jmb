@@ -8,3 +8,4 @@ const String PAGE_IMPLEMENTATION = "/page";
 const String ROWS_AND_COLUMNS = "/rowsandcolumns";
 const String COUNTER = "/counter";
 const String INSTAGRAM = "/instagram";
+const String GAME = "/game";

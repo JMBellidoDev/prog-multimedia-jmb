@@ -15,7 +15,8 @@ void main() {
         PAGE_IMPLEMENTATION: (context) => const PageImplementation(),
         ROWS_AND_COLUMNS: (context) => const RowsAndColumnsApp(),
         COUNTER: (context) => const CounterApp(),
-        INSTAGRAM: (context) => const Instagram()
+        INSTAGRAM: (context) => const Instagram(),
+        GAME: (context) => const GameApp()
       },
     debugShowCheckedModeBanner: false,
     ),

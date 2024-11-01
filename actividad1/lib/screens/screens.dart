@@ -6,4 +6,5 @@ export './icons.dart';
 export './rows_and_columns.dart';
 export './counter.dart';
 export './instagram.dart';
+export './game.dart';
 export '../utils/constants.dart';

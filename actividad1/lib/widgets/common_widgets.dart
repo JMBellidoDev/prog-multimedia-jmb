@@ -61,6 +61,9 @@ class InkedDrawerText extends StatelessWidget {
       case INSTAGRAM:
         return const Instagram();
 
+      case GAME:
+        return const GameApp();
+
       default:
         return const MainApp();
     }
@@ -91,6 +94,9 @@ class InkedDrawerText extends StatelessWidget {
 
       case INSTAGRAM:
         return 'Instagram';
+
+      case GAME:
+        return 'Game';
 
       default:
         return 'Home';
@@ -177,7 +183,8 @@ class MenuDrawer extends StatelessWidget {
                 InkedDrawerText(url: PAGE_IMPLEMENTATION, marked: markedLink == PAGE_IMPLEMENTATION),
                 InkedDrawerText(url: ROWS_AND_COLUMNS, marked: markedLink == ROWS_AND_COLUMNS),
                 InkedDrawerText(url: COUNTER, marked: markedLink == COUNTER),
-                InkedDrawerText(url: INSTAGRAM, marked: markedLink == INSTAGRAM)
+                InkedDrawerText(url: INSTAGRAM, marked: markedLink == INSTAGRAM),
+                InkedDrawerText(url: GAME, marked: markedLink == GAME)
               ],
             ),
           )
