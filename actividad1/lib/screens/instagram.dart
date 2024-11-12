@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/common_widgets.dart';
-import '../utils/constants.dart';
+import '../utils/app_routes.dart';
 import '../widgets/instagram_widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Instagram extends StatelessWidget {
   const Instagram({super.key});
@@ -12,9 +11,8 @@ class Instagram extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: Text('nombredeperfil   ▼',
-              style: GoogleFonts.rubik(
-                  fontSize: 18, fontWeight: FontWeight.bold))),
-      endDrawer: const MenuDrawer(markedLink: INSTAGRAM),
+              style: Theme.of(context).textTheme.headlineSmall)),
+      endDrawer: const MenuDrawer(markedLink: AppRoutes.instagram),
       body: const Column(
         children: [
           UserData(

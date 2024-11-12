@@ -1,7 +1,7 @@
 import '../widgets/row_widgets.dart';
 import 'package:flutter/material.dart';
 import '../widgets/common_widgets.dart';
-import '../utils/constants.dart';
+import '../utils/app_routes.dart';
 
 
 class RowApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class RowApp extends StatelessWidget {
 
     return const Scaffold(
       appBar: HeaderBar(headerText: 'Row'),
-      drawer: MenuDrawer(markedLink: ROW),
+      drawer: MenuDrawer(markedLink: AppRoutes.row),
       body: BodyRow(),
     );
 

@@ -1,7 +1,7 @@
 import '../widgets/page_implementation_widgets.dart';
 import 'package:flutter/material.dart';
 import '../widgets/common_widgets.dart';
-import '../utils/constants.dart';
+import '../utils/app_routes.dart';
 
 
 class PageImplementation extends StatelessWidget {
@@ -13,7 +13,7 @@ class PageImplementation extends StatelessWidget {
 
     return const Scaffold(
       appBar: HeaderBar(headerText: 'Page Implementation'),
-      drawer: MenuDrawer(markedLink: PAGE_IMPLEMENTATION),
+      drawer: MenuDrawer(markedLink: AppRoutes.pageImplementation),
       body: PageImplementationBody(),
     );
 

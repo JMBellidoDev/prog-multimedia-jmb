@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/game_widgets.dart';
 import '../widgets/common_widgets.dart';
-import '../utils/constants.dart';
+import '../utils/app_routes.dart';
 
 
 class GameApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class GameApp extends StatelessWidget {
 
     return const Scaffold(
       appBar: HeaderBar(headerText: 'Game'),
-      drawer: MenuDrawer(markedLink:  GAME),
+      drawer: MenuDrawer(markedLink:  AppRoutes.game),
       body: GameBody(),
     );
 

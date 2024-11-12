@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/common_widgets.dart';
-import '../widgets/main_widgets.dart';
-import '../utils/constants.dart';
+import '../widgets/home_widgets.dart';
+import '../utils/app_routes.dart';
 
 
 class MainApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
 
     return const Scaffold(
       appBar: HeaderBar(headerText: 'Página principal'),
-      drawer: MenuDrawer(markedLink: HOME),
+      drawer: MenuDrawer(markedLink: AppRoutes.home),
       body: BodyApp(),
     );
 

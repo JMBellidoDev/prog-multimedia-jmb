@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/common_widgets.dart';
-import '../utils/constants.dart';
+import '../utils/app_routes.dart';
 
 class CounterApp extends StatefulWidget {
   const CounterApp({super.key});
@@ -36,7 +36,7 @@ class _CounterBody extends State<CounterApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const HeaderBar(headerText: 'Counter'),
-      drawer: const MenuDrawer(markedLink: COUNTER),
+      drawer: const MenuDrawer(markedLink: AppRoutes.counter),
       body: Stack(
         children: [
 

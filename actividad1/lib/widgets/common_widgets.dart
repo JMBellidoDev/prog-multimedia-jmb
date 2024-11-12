@@ -11,21 +11,17 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-          title: Center(
-            child: Text(headerText, 
-              style: GoogleFonts.rubik(
-                color: Colors.white,
-                fontSize: 26
-              ),
-            )
-          ),
-          backgroundColor: Colors.blue,
-          toolbarHeight: 80,
-        );
+      title: Center(
+        child: Text(
+          headerText, 
+          style: Theme.of(context).textTheme.headlineLarge
+        )
+      ),
+    );
   }
   
   @override
-  Size get preferredSize => const Size.fromHeight(80.0);
+  Size get preferredSize => const Size.fromHeight(68.0);
 }
 
 class InkedDrawerText extends StatelessWidget {
@@ -37,31 +33,31 @@ class InkedDrawerText extends StatelessWidget {
 
   Widget getPageWithUrl(String url) {
     switch (url) {
-      case HOME:
+      case AppRoutes.home:
         return const MainApp();
       
-      case ROW:
+      case AppRoutes.row:
         return const RowApp();
 
-      case COLUMN:
+      case AppRoutes.column:
         return const ColumnApp();
 
-      case ICONS:
+      case AppRoutes.icons:
         return const IconsApp();
 
-      case PAGE_IMPLEMENTATION:
+      case AppRoutes.pageImplementation:
         return const PageImplementation();
         
-      case ROWS_AND_COLUMNS:
+      case AppRoutes.rowsAndColumns:
         return const RowsAndColumnsApp();
       
-      case COUNTER: 
+      case AppRoutes.counter: 
         return const CounterApp();
 
-      case INSTAGRAM:
+      case AppRoutes.instagram:
         return const Instagram();
 
-      case GAME:
+      case AppRoutes.game:
         return const GameApp();
 
       default:
@@ -71,31 +67,31 @@ class InkedDrawerText extends StatelessWidget {
 
   String getDrawerText(String url) {
         switch (url) {
-      case HOME:
+      case AppRoutes.home:
         return 'Home';
       
-      case ROW:
+      case AppRoutes.row:
         return 'Row';
 
-      case COLUMN:
+      case AppRoutes.column:
         return 'Column';
 
-      case ICONS:
+      case AppRoutes.icons:
         return 'Icons';
 
-      case PAGE_IMPLEMENTATION:
+      case AppRoutes.pageImplementation:
         return 'Page Implementation';
         
-      case ROWS_AND_COLUMNS:
+      case AppRoutes.rowsAndColumns:
         return 'Rows and Columns';
       
-      case COUNTER: 
+      case AppRoutes.counter: 
         return 'Counter';
 
-      case INSTAGRAM:
+      case AppRoutes.instagram:
         return 'Instagram';
 
-      case GAME:
+      case AppRoutes.game:
         return 'Game';
 
       default:
@@ -124,8 +120,7 @@ class InkedDrawerText extends StatelessWidget {
             )),
             onTap: 
             !marked ? () {
-              Navigator.of(context).pop();
-              Navigator.pushNamed(context, url);
+              Navigator.pushReplacementNamed(context, url);
             } : () {},
         )
       )
@@ -176,15 +171,15 @@ class MenuDrawer extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                InkedDrawerText(url: HOME, marked: markedLink == HOME),
-                InkedDrawerText(url: ROW, marked: markedLink == ROW),
-                InkedDrawerText(url: COLUMN, marked: markedLink == COLUMN),
-                InkedDrawerText(url: ICONS, marked: markedLink == ICONS),
-                InkedDrawerText(url: PAGE_IMPLEMENTATION, marked: markedLink == PAGE_IMPLEMENTATION),
-                InkedDrawerText(url: ROWS_AND_COLUMNS, marked: markedLink == ROWS_AND_COLUMNS),
-                InkedDrawerText(url: COUNTER, marked: markedLink == COUNTER),
-                InkedDrawerText(url: INSTAGRAM, marked: markedLink == INSTAGRAM),
-                InkedDrawerText(url: GAME, marked: markedLink == GAME)
+                InkedDrawerText(url: AppRoutes.home, marked: markedLink == AppRoutes.home),
+                InkedDrawerText(url: AppRoutes.row, marked: markedLink == AppRoutes.row),
+                InkedDrawerText(url: AppRoutes.column, marked: markedLink == AppRoutes.column),
+                InkedDrawerText(url: AppRoutes.icons, marked: markedLink == AppRoutes.icons),
+                InkedDrawerText(url: AppRoutes.pageImplementation, marked: markedLink == AppRoutes.pageImplementation),
+                InkedDrawerText(url: AppRoutes.rowsAndColumns, marked: markedLink == AppRoutes.rowsAndColumns),
+                InkedDrawerText(url: AppRoutes.counter, marked: markedLink == AppRoutes.counter),
+                InkedDrawerText(url: AppRoutes.instagram, marked: markedLink == AppRoutes.instagram),
+                InkedDrawerText(url: AppRoutes.game, marked: markedLink == AppRoutes.game)
               ],
             ),
           )

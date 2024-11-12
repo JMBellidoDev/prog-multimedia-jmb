@@ -22,20 +22,20 @@ class UserData extends StatelessWidget {
         ),
         Column(
           children: [
-            Text(publicaciones, style: GoogleFonts.rubik(fontWeight: FontWeight.bold)),
-            Text('Publicacio...', style: GoogleFonts.rubik())
+            Text(publicaciones, style: Theme.of(context).textTheme.labelMedium),
+            Text('Publicacio...', style: Theme.of(context).textTheme.bodyMedium)
           ],
         ), 
         Column(
           children: [
-            Text(seguidores, style: GoogleFonts.rubik(fontWeight: FontWeight.bold)),
-            Text('Seguidores', style: GoogleFonts.rubik())
+            Text(seguidores, style: Theme.of(context).textTheme.labelMedium),
+            Text('Seguidores', style: Theme.of(context).textTheme.bodyMedium)
           ],
         ), 
         Column(
           children: [
-            Text(seguidos, style: GoogleFonts.rubik(fontWeight: FontWeight.bold)),
-            Text('Seguidos', style: GoogleFonts.rubik())
+            Text(seguidos, style: Theme.of(context).textTheme.labelMedium),
+            Text('Seguidos', style: Theme.of(context).textTheme.bodyMedium)
           ],
         ), 
       ],
@@ -74,7 +74,7 @@ class Description extends StatelessWidget {
             children: [
               Text(
                 descripcion, 
-                style: GoogleFonts.rubik()
+                style: Theme.of(context).textTheme.bodyMedium
               )
             ]
           )
@@ -106,12 +106,12 @@ class EditProfile extends StatelessWidget {
       margin: const EdgeInsets.only(top: 16),
       padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 6),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade500, width: 1),
+        border: Border.all(color: Theme.of(context).dividerColor, width: 1),
         borderRadius: const BorderRadius.all(Radius.circular(6))
       ),
       child: Text(
         'Editar perfil',
-        style: GoogleFonts.rubik(fontWeight: FontWeight.w500),
+        style: Theme.of(context).textTheme.labelMedium,
       ),
     );
   }
@@ -152,7 +152,7 @@ class Contact extends StatelessWidget {
           ),
           Text(
             nombreContacto,
-            style: GoogleFonts.rubik(fontWeight: FontWeight.w500, fontSize: 13),
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ],
       ),
@@ -177,16 +177,16 @@ class Contacts extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.black54, 
+                    color: Theme.of(context).dividerColor, 
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(50),
                 ),
-                child: const Icon(Icons.add, size: 38, color: Colors.black87),
+                child: const Icon(Icons.add, size: 38),
               ),
               Text(
                 'Nuevo',
-                style: GoogleFonts.rubik(fontWeight: FontWeight.w500, fontSize: 13),
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ],
           ),
@@ -243,7 +243,7 @@ class IconsShow extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width / 2,
             padding: const EdgeInsets.only(bottom: 5),
-          child: const Icon(Icons.photo_camera_front_outlined, size: 32, color: Colors.black54,)
+          child: const Icon(Icons.photo_camera_front_outlined, size: 32, color: Colors.black38,)
           ),
           
         ],
@@ -302,6 +302,7 @@ class BottomNavigationBarInstagram extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      color: Theme.of(context).primaryColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

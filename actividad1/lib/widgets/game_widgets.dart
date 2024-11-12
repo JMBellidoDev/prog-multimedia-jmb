@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 import 'dart:async';
 
@@ -55,7 +54,9 @@ class _GameBodyState extends State<GameBody> {
 
     // Calcula la posición para la imagen de forma aleatoria
     getRandomPosition() {
-      double availableHeight = screenHeight - (screenHeight * 0.15) - (screenHeight * 0.10) - 86 - imageSize;
+
+      // alturaDisponible = alturaPantalla - alturaPuntuacion - alturaBotones - alturaAppBar - alturaImagen
+      double availableHeight = screenHeight - (screenHeight * 0.15) - (screenHeight * 0.10) - 68 - imageSize;
 
       double positionX = random.nextDouble() * (screenWidth - imageSize);
       double positionY = random.nextDouble() * availableHeight;
@@ -139,10 +140,7 @@ class _GameBodyState extends State<GameBody> {
         alignment: Alignment.center,
         child: Text(
           'Puntuación: $score',
-          style: GoogleFonts.rubik(
-            fontSize: 20,
-            fontWeight: FontWeight.bold
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ),
 

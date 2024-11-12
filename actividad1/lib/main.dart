@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-import 'screens/screens.dart';
+import './utils/app_routes.dart';
+import './customization/themes.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
       title: 'Actividad 1',
-      initialRoute: '/',
-      routes: {
-        HOME: (context) => const MainApp(),
-        ROW: (context) => const RowApp(),
-        COLUMN: (context) => const ColumnApp(),
-        ICONS: (context) => const IconsApp(),
-        PAGE_IMPLEMENTATION: (context) => const PageImplementation(),
-        ROWS_AND_COLUMNS: (context) => const RowsAndColumnsApp(),
-        COUNTER: (context) => const CounterApp(),
-        INSTAGRAM: (context) => const Instagram(),
-        GAME: (context) => const GameApp()
-      },
-    debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
+      theme: customizedLightTheme,
+      initialRoute: AppRoutes.home,
+      routes: AppRoutes.routes,
+      debugShowCheckedModeBanner: false,
     ),
   );
 }
