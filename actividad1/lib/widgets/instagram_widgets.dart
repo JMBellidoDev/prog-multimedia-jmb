@@ -215,37 +215,122 @@ class Contacts extends StatelessWidget {
     );
   }
 }
-class IconsShow extends StatelessWidget {
-  const IconsShow({super.key});
+
+class Tabs extends StatefulWidget {
+  const Tabs({super.key});
+
+  @override
+  State<Tabs> createState() => _TabsState();
+}
+
+class _TabsState extends State<Tabs> {
+  @override
+  Widget build(BuildContext context) {
+    return const DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.grid_on, size: 32)),
+              Tab(icon: Icon(Icons.photo_camera_front_outlined, size: 32)),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                ImageGrid(),
+                Profile()
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+class ImageGrid extends StatelessWidget {
+  const ImageGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10),
-      padding: const EdgeInsets.only(top: 15),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.black12, width: 2))
-      ),
+    return GridView.count(
+      mainAxisSpacing: 2,
+      crossAxisSpacing: 2,
+      crossAxisCount: 3,
+      children: List.generate(9, (index) {
+        return SizedBox(
+          child: Image.asset(
+            'assets/images/instagram/grid-${index + 1}.png',
+            fit: BoxFit.cover,
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class Profile extends StatelessWidget {
+  const Profile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        Text(
+          'Información de Contacto',
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Nombre de usuario: nombredeperfil',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Email: emaildelnombredeperfil@gmail.com',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Nombre completo: Nombre Completo',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Fecha de nacimiento: dd-mm-yyyy',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Página Web: https://enlaceweb.com/',
+          style: GoogleFonts.rubik(color: Colors.blue.shade900, fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+}
+
+class BottomNavigationBarInstagram extends StatelessWidget {
+  const BottomNavigationBarInstagram({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: Theme.of(context).primaryColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-
-          Container(
-            // Obtención de la mitad del tamaño total de la pantalla
-            width: MediaQuery.of(context).size.width / 2,
-            padding: const EdgeInsets.only(bottom: 5),
-            decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.black45, width: 2))
-            ),
-          child: const Icon(Icons.grid_on, size: 32),
-          ),
-
-          Container(
-            width: MediaQuery.of(context).size.width / 2,
-            padding: const EdgeInsets.only(bottom: 5),
-          child: const Icon(Icons.photo_camera_front_outlined, size: 32, color: Colors.black38,)
-          ),
-          
+          IconButton(icon: const Icon(Icons.home_outlined, size: 34), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.search, size: 34), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.add_box_outlined, size: 34), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.favorite_border, size: 34), onPressed: () {}),
+          const ContactMe(),
         ],
       )
     );
@@ -270,49 +355,6 @@ class ContactMe extends StatelessWidget {
       child: ClipOval(
         child: Image.asset('assets/images/instagram/perfil-instagram.png', width: 24),
       ),
-    );
-  }
-}
-
-class ImageGrid extends StatelessWidget {
-  const ImageGrid({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.count(
-      mainAxisSpacing: 2,
-      crossAxisSpacing: 2,
-      crossAxisCount: 3,
-      children: List.generate(9, (index) {
-        return SizedBox(
-          child: Image.asset(
-            'assets/images/instagram/grid-${index + 1}.png',
-            fit: BoxFit.cover,
-          ),
-        );
-      }),
-    ));
-  }
-}
-
-class BottomNavigationBarInstagram extends StatelessWidget {
-  const BottomNavigationBarInstagram({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: Theme.of(context).primaryColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          IconButton(icon: const Icon(Icons.home_outlined, size: 34), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.search, size: 34), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.add_box_outlined, size: 34), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.favorite_border, size: 34), onPressed: () {}),
-          const ContactMe(),
-        ],
-      )
     );
   }
 }

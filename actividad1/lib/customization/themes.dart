@@ -54,6 +54,7 @@ final customizedLightTheme = ThemeData(
     ),
 
     // Texto del cuerpo
+    labelLarge: GoogleFonts.rubik(fontWeight: FontWeight.bold, fontSize: 18),
     labelMedium: GoogleFonts.rubik(fontWeight: FontWeight.bold, fontSize: 14),
     labelSmall: GoogleFonts.rubik(fontWeight: FontWeight.w500, fontSize: 13),
     bodyMedium: GoogleFonts.rubik()

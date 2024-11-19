@@ -32,6 +32,8 @@ class _GameBodyState extends State<GameBody> {
   bool gameStarted = false;
   int score = 0;
   int newScore = 0;
+  int imagesClicked = 0;
+  int totalImages = 0;
   var position = [-1.0, -1.0];
   String image = images[0];
   int timerInterval = startTimer;
@@ -56,7 +58,7 @@ class _GameBodyState extends State<GameBody> {
     getRandomPosition() {
 
       // alturaDisponible = alturaPantalla - alturaPuntuacion - alturaBotones - alturaAppBar - alturaImagen
-      double availableHeight = screenHeight - (screenHeight * 0.15) - (screenHeight * 0.10) - 68 - imageSize;
+      double availableHeight = screenHeight - (screenHeight * 0.15) - (screenHeight * 0.15) - 78 - imageSize;
 
       double positionX = random.nextDouble() * (screenWidth - imageSize);
       double positionY = random.nextDouble() * availableHeight;
@@ -77,24 +79,68 @@ class _GameBodyState extends State<GameBody> {
           image = getRandomImage();
           score = newScore;
           clicked = false;
+          totalImages++;
         });
         newScore -= 2;
       });
     }
 
-    // Acción para iniciar el juego (sólo si ya se ha iniciado)
+    // Acción para iniciar el juego (sólo si no se ha iniciado)
     void playGame() {
       if (!gameStarted) {
         setTimer(timerInterval);
         gameStarted = true;
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Juego iniciado'), 
+            duration: const Duration(seconds: 1),
+            showCloseIcon: true,
+            backgroundColor: Colors.green.shade700,
+          )
+        );
       }
     }
 
     // Acción para finalizar el juego
     void finishGame() {
+      timer?.cancel();
+      
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Fin de Partida'),
+              children: <Widget>[
+                Flex(
+                  direction: Axis.vertical,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('Puntuación', style: Theme.of(context).textTheme.labelLarge),
+                    Text(score.toString(), style: Theme.of(context).textTheme.labelLarge),
+                    Text('Imágenes clickadas', style: Theme.of(context).textTheme.labelLarge),
+                    Text(imagesClicked.toString(), style: Theme.of(context).textTheme.labelLarge),
+                    Text('Imágenes totales', style: Theme.of(context).textTheme.labelLarge),
+                    Text(totalImages.toString(), style: Theme.of(context).textTheme.labelLarge),
+                    SimpleDialogOption(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Aceptar', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),),
+                    )
+                  ],
+                )
+                
+              ]
+            );
+          }
+        );
+
       setState(() {
-        timer?.cancel();
       });
+
+
     }
 
     // Acción para resetear el juego. Resetea puntuación, posición de imagen, tiempo de intervalos, Timer y booleanos de juego
@@ -102,6 +148,8 @@ class _GameBodyState extends State<GameBody> {
       setState(() {
         score = 0;
         newScore = 0;
+        imagesClicked = 0;
+        totalImages=0;
         position = [-1, -1];
         timerInterval = startTimer;
         timer?.cancel();
@@ -110,6 +158,16 @@ class _GameBodyState extends State<GameBody> {
         clicked = false;
         changedTimer = false;
       });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Juego reiniciado'), 
+          duration: const Duration(seconds: 1),
+          showCloseIcon: true,
+          backgroundColor: Colors.green.shade400,
+        )
+      );
+
     }
 
     // Acción al hacer click en la imagen
@@ -120,6 +178,7 @@ class _GameBodyState extends State<GameBody> {
         newScore += 3;
         setState((){
           clicked = true;
+          imagesClicked++;
         });
       }
 
@@ -165,7 +224,9 @@ class _GameBodyState extends State<GameBody> {
 
       // Contenedor de los botones
       Container(
-        height: screenHeight * 0.1,
+        height: screenHeight * 0.15,
+        alignment: Alignment.topCenter,
+        padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
           color: Colors.blue,
           border: Border(

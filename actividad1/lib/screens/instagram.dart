@@ -27,8 +27,9 @@ class Instagram extends StatelessWidget {
           ),
           EditProfile(),
           Contacts(),
-          IconsShow(),
-          ImageGrid()
+          Expanded(
+            child: Tabs()
+          )
         ],
       ),
       bottomNavigationBar: const BottomNavigationBarInstagram()
