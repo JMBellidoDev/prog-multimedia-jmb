@@ -7,4 +7,5 @@ export './rows_and_columns.dart';
 export './counter.dart';
 export './instagram.dart';
 export './game.dart';
+export './form.dart';
 export '../utils/app_routes.dart';

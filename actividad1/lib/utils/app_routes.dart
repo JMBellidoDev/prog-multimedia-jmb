@@ -13,6 +13,7 @@ class AppRoutes {
   static const String counter = "/counter";
   static const String instagram = "/instagram";
   static const String game = "/game";
+  static const String form = "/form";
 
   // Mapas de rutas
   static final Map<String, WidgetBuilder> routes = {
@@ -24,7 +25,8 @@ class AppRoutes {
     rowsAndColumns: (context) => const RowsAndColumnsApp(),
     counter: (context) => const CounterApp(),
     instagram: (context) => const Instagram(),
-    game: (context) => const GameApp()
+    game: (context) => const GameApp(),
+    form: (context) => const FormApp()
   };
 
 }

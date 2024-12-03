@@ -60,6 +60,9 @@ class InkedDrawerText extends StatelessWidget {
       case AppRoutes.game:
         return const GameApp();
 
+      case AppRoutes.form:
+        return const FormApp();
+
       default:
         return const MainApp();
     }
@@ -93,6 +96,9 @@ class InkedDrawerText extends StatelessWidget {
 
       case AppRoutes.game:
         return 'Game';
+
+      case AppRoutes.form:
+        return 'Form';
 
       default:
         return 'Home';
@@ -179,11 +185,11 @@ class MenuDrawer extends StatelessWidget {
                 InkedDrawerText(url: AppRoutes.rowsAndColumns, marked: markedLink == AppRoutes.rowsAndColumns),
                 InkedDrawerText(url: AppRoutes.counter, marked: markedLink == AppRoutes.counter),
                 InkedDrawerText(url: AppRoutes.instagram, marked: markedLink == AppRoutes.instagram),
-                InkedDrawerText(url: AppRoutes.game, marked: markedLink == AppRoutes.game)
+                InkedDrawerText(url: AppRoutes.game, marked: markedLink == AppRoutes.game),
+                InkedDrawerText(url: AppRoutes.form, marked: markedLink == AppRoutes.form)
               ],
             ),
           )
-          
         ],
       )
     );
