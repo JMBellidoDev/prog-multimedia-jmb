@@ -2,9 +2,23 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 // Tiempos para el Timer
 const int startTimer = 1500;
 const int endTimer = 1000;
+
+// Constantes para la puntuación
+const String firstScore = 'first_score';
+const String secondScore = 'second_score';
+const String thirdScore = 'third_score';
+
+var scores = {
+  firstScore: 0,
+  secondScore: 0,
+  thirdScore: 0
+};
+
 
 // Tamaño de las imagenes
 int imageSize = 96;
@@ -32,8 +46,6 @@ class _GameBodyState extends State<GameBody> {
   bool gameStarted = false;
   int score = 0;
   int newScore = 0;
-  int imagesClicked = 0;
-  int totalImages = 0;
   var position = [-1.0, -1.0];
   String image = images[0];
   int timerInterval = startTimer;
@@ -47,6 +59,53 @@ class _GameBodyState extends State<GameBody> {
 
   // Timer
   Timer? timer;
+
+  // Lee las puntuaciones del almacenamiento local (Shared Preferences)
+  loadScore() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    scores[firstScore] = prefs.getInt(firstScore) ?? 0;
+    scores[secondScore] = prefs.getInt(secondScore) ?? 0;
+    scores[thirdScore] = prefs.getInt(thirdScore) ?? 0;
+
+    setState(() {
+      score = (prefs.getInt('personal_score') ?? 0);
+      newScore = score;
+    });
+  }
+
+  // Establece la puntuación en el almacenamiento local (Shared Preferences) y actualiza las mejores puntuaciones
+  setScore() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (scores[firstScore] !< score) {
+      scores[thirdScore] = scores[secondScore] ?? 0; 
+      scores[secondScore] = scores[firstScore] ?? 0;
+      scores[firstScore] = score;
+
+    } else if (scores[secondScore] !< score) {
+      scores[thirdScore] = scores[secondScore] ?? 0;
+      scores[secondScore] = score;
+
+    } else if (scores[thirdScore] !< score) {
+      scores[thirdScore] = score;
+    }
+
+    setState(() {
+      prefs.setInt('personal_score', score);
+      prefs.setInt(firstScore, scores[firstScore] ?? 0);
+      prefs.setInt(secondScore, scores[secondScore] ?? 0);
+      prefs.setInt(thirdScore, scores[thirdScore] ?? 0);
+    });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    loadScore();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +138,6 @@ class _GameBodyState extends State<GameBody> {
           image = getRandomImage();
           score = newScore;
           clicked = false;
-          totalImages++;
         });
         newScore -= 2;
       });
@@ -88,6 +146,8 @@ class _GameBodyState extends State<GameBody> {
     // Acción para iniciar el juego (sólo si no se ha iniciado)
     void playGame() {
       if (!gameStarted) {
+        score = 0;
+        newScore = 0;
         setTimer(timerInterval);
         gameStarted = true;
         
@@ -105,6 +165,7 @@ class _GameBodyState extends State<GameBody> {
     // Acción para finalizar el juego
     void finishGame() {
       timer?.cancel();
+      setScore();
       
       showDialog(
         context: context,
@@ -117,12 +178,12 @@ class _GameBodyState extends State<GameBody> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text('Puntuación', style: Theme.of(context).textTheme.labelLarge),
+                    Text('Tu puntuación', style: Theme.of(context).textTheme.labelLarge),
                     Text(score.toString(), style: Theme.of(context).textTheme.labelLarge),
-                    Text('Imágenes clickadas', style: Theme.of(context).textTheme.labelLarge),
-                    Text(imagesClicked.toString(), style: Theme.of(context).textTheme.labelLarge),
-                    Text('Imágenes totales', style: Theme.of(context).textTheme.labelLarge),
-                    Text(totalImages.toString(), style: Theme.of(context).textTheme.labelLarge),
+                    Text('Mejores Puntuaciones', style: Theme.of(context).textTheme.labelLarge),
+                    Text('1º - ${scores[firstScore]}', style: Theme.of(context).textTheme.labelMedium),
+                    Text('2º - ${scores[secondScore]}', style: Theme.of(context).textTheme.labelMedium),
+                    Text('3º - ${scores[thirdScore]}', style: Theme.of(context).textTheme.labelMedium),
                     SimpleDialogOption(
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -148,8 +209,6 @@ class _GameBodyState extends State<GameBody> {
       setState(() {
         score = 0;
         newScore = 0;
-        imagesClicked = 0;
-        totalImages=0;
         position = [-1, -1];
         timerInterval = startTimer;
         timer?.cancel();
@@ -178,7 +237,6 @@ class _GameBodyState extends State<GameBody> {
         newScore += 3;
         setState((){
           clicked = true;
-          imagesClicked++;
         });
       }
 
